@@ -1,0 +1,49 @@
+header.header {
+	z-index: $z-index-highest;
+	// position: fixed; @todo @fixme
+	top: 0;
+	left: 0;
+	right: 0;
+	background-color: $color-ui-main;
+	border-bottom: 1px transparentize($color-ui-main-darker, .5) solid;
+    box-shadow: $light-box-shadow;
+
+	.icon {
+	    height: 1.5rem;
+    	width: 1.5rem;
+    	fill: $color-grey;
+	}
+
+	.navbar {
+		display: flex;
+		background-color: transparent;
+	}
+
+	.navbar-start {
+		display: flex;
+		align-items: stretch;
+	}
+
+	.navbar-entry {
+		align-items: center;
+	    display: flex;
+        padding: 0.5rem 1rem;
+        transition: background-color $transition-duration;
+        transition-timing-function: ease-in;
+
+        color: $color-grey;
+
+		&:hover {
+        	transition-timing-function: ease-out;
+			cursor: pointer;
+			color: $color-grey;
+			background: $color-ui-main-darker;
+		}
+	}
+
+	.navbar-end {
+		display: flex;
+	    justify-content: flex-end;
+	    margin-left: auto;
+	}
+}

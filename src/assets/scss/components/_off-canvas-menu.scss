@@ -1,0 +1,130 @@
+header {
+	font-family: $secondary-font-family;
+
+	.off-canvas {
+		position: fixed;
+		z-index: $z-index-highest;
+		top: 0;
+		bottom: 0;
+		background: white;
+		pointer-events: none;
+		transform: translateX(-100%);
+		transition: transform $transition-duration;
+        transition-timing-function: ease-in;
+
+		&.open{
+			pointer-events: all;
+			opacity: 1;
+			transform: translateX(0);
+        	transition-timing-function: ease-out;
+		}
+
+		ul {
+			list-style-type: none;
+			margin: 0;
+		}
+
+		.navbar-entry {
+			padding-top: 10px;
+			padding-bottom: 10px;
+
+			&:hover{
+				background-color: $color-grey-light;
+			}
+
+			.arrow,
+			.icon {
+				display: flex;
+				align-items: center;
+			}
+
+			.link-label {
+				padding: 0 10px;
+			}
+
+			.arrow {
+				margin-left: auto;
+			}
+		}
+
+		.user-navbar-entry {
+			position: relative;
+			padding-top: 20px;
+			padding-bottom: 20px;
+			background-color: $color-ui-main;
+			
+			&::before {
+				content: "";
+				position: absolute;
+				left: 0;
+				right: 0;
+				top: 0;
+				bottom: 0;
+				background-image: linear-gradient(to right, transparentize($color-black, .75) 0%, transparentize($color-black, 1) 50%);
+				pointer-events: none;
+			}
+
+			&:hover{
+				background-color: $color-ui-main-darker;
+			}
+
+			.badge {
+				position: relative;
+	    		margin-right: 20px;
+	    		color: $color-ui-main;
+	    		font-size: 30px;
+			}
+
+			.user-name {
+	    		text-transform: uppercase;
+	    		display: inline-block;
+	    		color: $color-white;
+
+				&::before {
+					left: -10px;
+				}
+
+				&::after {
+					right: -10px;
+				}
+			}
+
+			.arrow {
+	    		.icon {
+	    			width: 2.5rem;
+	    			height: 2.5rem;
+	    			fill: $color-white;		
+	    		}
+	    	}
+	    }
+
+	    .initial-container {
+			background: white;
+		    width: 100px;
+		    height: 100px;
+		    border-radius: 50%;
+	    }
+	}
+}
+
+.off-canvas-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: $z-index-highest;
+	background: transparentize($color-black, .5);
+	opacity: 0;
+	transition: opacity $transition-duration;
+    transition-timing-function: ease-in;
+
+	pointer-events: none;
+
+	&.active{
+		pointer-events: all;
+		opacity: 1;
+		transform: translateX(0);
+    	transition-timing-function: ease-out;
+	}
+}

@@ -1,0 +1,16 @@
+$badge-dimensions: 50px;
+
+.badge {
+	display: flex;
+    justify-content: center;
+    align-items: center;
+
+	width: $badge-dimensions;
+	height: $badge-dimensions;
+	background: $color-white;
+	border-radius: 50%;
+
+	&:focus {
+		outline:0;
+	}
+}
