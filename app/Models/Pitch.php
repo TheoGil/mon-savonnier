@@ -34,6 +34,15 @@ class Pitch extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+    public function product()
+    {
+    	$this->hasOne('App\Models\Product','id', 'product_id');
+    }
+    
+    public function country()
+    {
+    	$this->hasOne('App\Models\Country', 'id', 'country_id');
+    }
 
     /*
     |--------------------------------------------------------------------------

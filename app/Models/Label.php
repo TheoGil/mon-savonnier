@@ -37,6 +37,7 @@ class Label extends Model
 		public function logo() {
 			return $this->hasOne('App\Models\Picture','id', 'picture_id');
 		}
+		
     /*
     |--------------------------------------------------------------------------
     | SCOPES
