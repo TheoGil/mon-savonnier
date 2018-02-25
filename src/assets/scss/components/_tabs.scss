@@ -1,0 +1,91 @@
+.tabs-wrapper {
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+	margin-bottom: 1rem;
+	background: $color-ui-main;
+
+	&::before,
+	&::after {
+		content: '';
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		pointer-events: none;
+		width: 50px;
+		opacity: 0;
+		transition: opacity $transition-duration ease-out;
+	}
+
+	&::before {
+		left: 0;
+		background: linear-gradient(90deg, transparentize($color-ui-main-darker, .5), transparentize($color-ui-main, 1));
+		z-index: 1;
+	}
+
+	&::after {
+		right: 0;
+		background: linear-gradient(90deg, transparentize($color-ui-main, 1), transparentize($color-ui-main-darker, .5));
+	}
+
+	&.is-left-hidden {
+		&::before {
+			opacity: 1;
+		}
+	}
+
+	&.is-right-hidden {
+		&::after {
+			opacity: 1;
+		}
+	}
+}
+.tabs-container {
+	position: relative;
+	margin: 0 -0.5rem;
+	display: flex;
+	overflow: auto;
+	list-style-type: none;
+	white-space: nowrap;
+
+	li {
+		display: flex;
+
+		a {
+			font-family: 'Pathway Gothic One', sans-serif;
+			position: relative;
+			padding: .5rem 1.5rem;
+			color: $color-grey;
+			transition-property: all;
+			transition-duration: $transition-duration;
+			transition-timing-function: ease-in;
+
+			&::after {
+				content: '';
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				height: 5px;
+				background: $color-white;
+				transform: scaleY(0);
+				transition-timing-function: ease-in; 
+				transform-origin: bottom;
+			}
+
+			&.is-active,
+			&:hover {
+				background: $color-ui-main-darker;
+				transition-timing-function: ease-out;
+				color: $color-ui-light;
+
+				&::after {
+					transition-property: transform;
+					transition-duration: $transition-duration;
+					transition-timing-function: ease-out;
+					transform: scaleY(1);
+				}
+			}
+		}
+	}
+}

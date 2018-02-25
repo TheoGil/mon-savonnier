@@ -1,0 +1,10 @@
+img.lazy {
+	transition-property: opacity;
+	transition-duration: $transition-duration;
+	transition-timing-function: ease-out;
+	opacity: 0;
+
+	&[lazy=loaded] {
+		opacity: 1;
+	}
+}

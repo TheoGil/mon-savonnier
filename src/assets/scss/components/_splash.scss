@@ -1,0 +1,118 @@
+$baseline-text-shadow: 0 0 5px transparentize($color-black, .3);
+
+.splash {
+  // TEMPORARY HACK COMPENSATION OF FIXED POSITION @todo @fixme
+  // padding-top: 40px;
+
+  height: 95vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.splash-upper {
+  position: relative;
+  background-image: url('./assets/splash-bg.jpg');
+  background-size: cover;
+  background-position: 50% 50%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.splash-baseline-container {
+  padding: 50px $gutter-width 75px $gutter-width;
+  margin-bottom: 50px;
+  text-align: center;
+  text-transform: uppercase;
+  text-shadow: $baseline-text-shadow;
+  color: $color-white;
+
+  .website-title {
+    font-size: 40px;
+    line-height: 1;
+  }
+
+  .greeting-message {
+    font-size: 20px;
+  }
+
+  .user-name {
+    display: inline-block;
+    font-style: italic;
+    font-size: 30px;
+
+    &::before,
+    &::after {
+      box-shadow: $baseline-text-shadow;
+    }
+  }
+}
+
+.logo-container {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  bottom: 0;
+  width: 250px;
+  max-width: 60%;
+  max-height: 60%;
+  margin: auto;
+  transform: translate(-50%, 50%);
+
+  .logo-outside-container {
+    transform-origin: 50% 50%;
+    animation-name: logo-animation;
+    animation-duration: 30s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+
+  .logo-inside-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
+
+.elevator-container {
+  min-height: 200px;
+  position: relative;
+
+  .elevator {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    svg {
+      fill: $color-blue-grey;
+      width: 50px;
+      height: 50px;
+    }
+  }
+}
+
+@keyframes logo-animation {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+
+  25% {
+    transform: rotate(90deg) scale(1.1);
+  }
+
+  50% {
+    transform: rotate(180deg) scale(1);
+  }
+
+  75% {
+    transform: rotate(270deg) scale(1.1);
+  }
+
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}

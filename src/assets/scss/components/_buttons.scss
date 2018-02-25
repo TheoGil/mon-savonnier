@@ -1,0 +1,17 @@
+.transparent {
+	border: 0;
+	background: transparent;
+}
+
+.button {
+	padding: .5rem 1rem;
+	border-radius: $button-border-radius;
+	background: $color-ui-main;
+	color: $color-grey;
+	cursor: pointer;
+	transition: $transition-duration;
+
+	&:hover {
+		background: $color-ui-main-darker;
+	}
+}

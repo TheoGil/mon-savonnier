@@ -1,0 +1,52 @@
+// Import variables before vendors so they can use it 
+@import "./_variables.scss";
+
+// Vendors
+@import "./_vendors.scss";
+
+// Custom elements, components, pages...
+@import "./_fonts.scss";
+@import "./_utilities.scss";
+@import "./components/_typography.scss";
+@import "./components/_header.scss";
+@import "./components/_off-canvas-menu.scss";
+@import "./components/_splash.scss";
+@import "./components/_dots.scss";
+@import "./components/_buttons.scss";
+@import "./components/_badge.scss";
+@import "./components/_products-categories.scss";
+@import "./components/_product.scss";
+@import "./components/_tabs.scss";
+@import "./components/_listings.scss";
+@import "./components/_lazyload.scss";
+@import "./components/_stars.scss";
+@import "./components/_grid.scss";
+@import "./components/_reviews.scss";
+@import "./components/_forms.scss";
+
+/*
+
+VUE ROUTER TRANSITIONS, COMMENTED OUT FOR NOW
+
+.slide-right-enter-active, .slide-right-leave-active {
+  transition: transform 10s;
+  background: red;
+}
+
+.slide-right-enter, .slide-right-leave-active {
+  transform: translateX(100%);
+  opacity: .5;
+  position: absolute;
+}
+
+.slide-left-enter-active, .slide-left-leave-active {
+  transition: transform 10s
+}
+
+.slide-left-enter, .slide-left-leave-active {
+  transform: translateX(-100%);
+  position: absolute;
+  opacity: .5;
+}
+
+*/
