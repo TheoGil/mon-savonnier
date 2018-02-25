@@ -1,0 +1,137 @@
+.cart-product-listing {
+  margin: 1.5rem 0 0;
+  list-style-type: none;
+
+  // Hide separator on last item
+  li {
+    &:last-of-type {
+      .cart-product-item {
+        &::after {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+.cart-product-item {
+  position: relative;
+  margin-bottom: 2rem;
+
+  // Separator
+  &::after {
+    content: '';
+    position: absolute;
+    height: 1px;
+    bottom: -1rem;
+    width: 90%;
+    max-width: 1000px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: $color-grey-light;
+  }
+
+  .remove-from-cart {
+    position: absolute;
+    right: 0;
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+
+    svg {
+      width: 100%;
+      height: 100%;
+      fill: $color-ui-main;
+      transition: fill $transition-duration;
+    }
+
+    &:hover {
+      svg {
+        fill: $color-ui-main-darker;
+      }
+    }
+  }
+
+  // Aspect ratio helper, always 1:1
+  .thumbnail-outer {
+    position: relative;
+    overflow: hidden;
+
+    &:before {
+      display: block;
+      content: '';
+      width: 100%;
+      padding-top: (1 / 1) * 100%;
+    }
+
+    .thumbnail {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .header {
+    position: relative;
+    margin-bottom: 1rem;
+  }
+
+  .product-info {
+    margin-bottom: 0.1rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+    line-height: 1.2;
+    margin-bottom: .5rem;
+    padding-right: 40px;
+  }
+
+  .secondary {
+    color: $color-grey;
+  }
+
+  .size {
+    font-size: 0.9rem;
+  }
+
+  .form-control {
+    margin-bottom: 0;
+  }
+
+  .quantity-input-container {
+    input[type="number"] {
+      max-width: 75px;
+    }
+  }
+}
+
+.cart-review-container {
+  background-color: $color-grey-light;
+  padding: 1rem 0;
+
+  .cart-review-line {
+    display: flex;
+    margin-bottom: 0.3rem;
+  }
+
+  .cart-review-value {
+    margin-left: auto;
+  }
+}
+
+.actions-container {
+  background-color: $color-grey-lighter;
+  padding: 1rem 0;
+}
+
+.empty-cart {
+  $header-height: 41px;
+  height: calc(100vh - #{$header-height});
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

@@ -1,21 +1,26 @@
 <template>
-  <div class="quantity-input-container">
-    <button 
-      class="button" 
+  <div class="quantity-input-container" :class="{disabled: isDisabled}">
+    <button
+      class="button"
+      type="button"
       v-on:click="decrement"
+      :class="{disabled: value <= 1}"
     >
       -
     </button>
-    <input 
-      type="number" 
-      v-model="value" 
+    <input
+      type="number"
+      v-model="value"
       v-bind:max="maxValue"
       min="1"
       :id="inputName"
+      readonly
     >
-    <button 
+    <button
       class="button"
+      type="button"
       v-on:click="increment"
+      :class="{disabled: value >= maxValue}"
     >
       +
     </button>
@@ -25,19 +30,25 @@
 <script>
   export default {
     name: 'Quantity',
-    props: ['value', 'maxValue', 'inputName'],
-    data() {
-      return {};
+    props: {
+      value: {},
+      maxValue: {},
+      inputName: {},
+      isDisabled: {
+        default: false,
+      },
     },
     methods: {
       increment() {
-        if (this.value < this.maxValue) {
-          // this.value += 1;
+        console.log(this.value < this.maxValue);
+        console.log(!this.isDisabled);
+
+        if ((this.value < this.maxValue) && !this.isDisabled) {
           this.$emit('setQuantity', this.value + 1);
         }
       },
       decrement() {
-        if (this.value > 1) {
+        if ((this.value > 1) && !this.isDisabled) {
           this.$emit('setQuantity', this.value - 1);
         }
       },

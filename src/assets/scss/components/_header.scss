@@ -25,6 +25,7 @@ header.header {
 	}
 
 	.navbar-entry {
+		position: relative;
 		align-items: center;
 	    display: flex;
         padding: 0.5rem 1rem;
@@ -45,5 +46,36 @@ header.header {
 		display: flex;
 	    justify-content: flex-end;
 	    margin-left: auto;
+	}
+
+	.products-counter {
+		width: 20px;
+		height: 20px;
+		font-size: 12px;
+		position: absolute;
+		top: 0;
+		right: 0;
+		background: $color-green;
+		color: $color-white;
+		box-shadow: $light-box-shadow;
+
+		.current {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+
+		.next {
+			opacity: 0;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+
+		&.hidden {
+			opacity: 0;
+		}
 	}
 }

@@ -44,15 +44,23 @@
           </div>
           <div class="form-control product-price desktop">
             <span itemprop="price" :content="price">{{ price }}</span>
-            <span itemprop="priceCurrency" content="EUR">&euro;</span>
           </div>
-          <button class="badge product-buy flex" type="submit">
-            <svg class="icon">
-              <use xlink:href="#icon-cart"></use>
-            </svg>
-            <span class="desktop">
-              Ajouter au panier
+          <button class="badge product-buy flex button"
+            v-on:click="handleClickAddButton"
+            :class="classObject"
+            type="button"
+          >
+            <span v-if="!displayLoader || this.isMobile">
+              <svg class="icon">
+                <use xlink:href="#icon-cart"></use>
+              </svg>
+              <span class="desktop">
+                Ajouter au panier
+              </span>
             </span>
+            <svg class="spinner" v-if="displayLoader && !this.isMobile">
+              <use xlink:href="#icon-spinner"></use>
+            </svg>
           </button>
           <heart/>
           <a class="badge share" href="#">
@@ -139,6 +147,66 @@
         </table>
       </section>
     </div>
+    <modal v-if="displaySizeQuantityModal" @close="displaySizeQuantityModal = false">
+      <div slot="body">
+        <div class="modal-section">
+          <div class="h3">Taille</div>
+          <sizes
+            :selected-size="selectedSize"
+            v-on:setSize="setSize"
+          />
+        </div>
+        <div class="modal-section form-control">
+          <div class="h3">Quantitée</div>
+          <quantity
+            :value="quantity"
+            :max-value="availableStock"
+            :input-name="'quantity'"
+            v-on:setQuantity="setQuantity"
+          />
+        </div>
+        <div class="modal-actions">
+          <button class="button transparent" @click="displaySizeQuantityModal = false">
+            Annuler
+          </button>
+          <button class="button" @click="addToCart">
+            <span v-if="!displayLoader">Ajouter</span>
+            <svg class="spinner" v-if="displayLoader">
+              <use xlink:href="#icon-spinner"></use>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </modal>
+    <modal v-if="displayAddConfirmationModal" @close="displayAddConfirmationModal = false">
+      <div slot="body">
+        <div class="modal-section">
+          L'article "{{ title }}" a bien été ajouté au panier!
+        </div>
+        <div class="modal-actions">
+          <button class="button transparent" @click="displayAddConfirmationModal = false">
+            Poursuivre mes achats
+          </button>
+          <router-link to="/cart" class="button">
+            Accéder au panier
+          </router-link>
+        </div>
+      </div>
+    </modal>
+    <modal v-if="displayErrorModal" @close="displayErrorModal = false">
+      <div slot="body">
+        <div class="h3">Oups...</div>
+        <div class="modal-section">
+          Une erreur est survenue lors de l'ajout du produit à votre panier.<br>
+          Il est possible que son stock soit épuisé.
+        </div>
+        <div class="modal-actions">
+          <button class="button" @click="displayErrorModal = false">
+            Rammenez moi à la fiche produit
+          </button>
+        </div>
+      </div>
+    </modal>
   </div>
 </template>
 
@@ -147,26 +215,89 @@
   import Heart from '../../components/Heart';
   import Quantity from '../../components/Quantity';
   import Sizes from '../../components/Sizes';
+  import Modal from '../../components/Modal';
 
   export default {
     name: 'Product',
     data() {
       return {
+        id: 10754,
         title: 'Bulles d\'amande douce',
-        price: '5.90',
+        price: 5.90,
         note: 4,
         reviewCount: 32,
         selectedSize: 'medium',
         quantity: 1,
         availableStock: 5,
+
+        displaySizeQuantityModal: false,
+        displayAddConfirmationModal: false,
+        displayErrorModal: false,
+        isMobile: false,
+        displayLoader: false,
       };
     },
+    mounted() {
+      this.setIsMobile();
+      window.addEventListener('resize', this.setIsMobile);
+    },
+    computed: {
+      classObject() {
+        return {
+          loading: this.displayLoader && !this.isMobile,
+        };
+      },
+    },
     methods: {
+      setIsMobile() {
+        // @TODO implement the foundation utils that retrieve scss breakpoints in JS
+        const smallBreakpoint = 800;
+        this.isMobile = window.innerWidth < smallBreakpoint;
+      },
       setQuantity(newQuantity) {
         this.quantity = newQuantity;
       },
       setSize(newSize) {
         this.selectedSize = newSize;
+      },
+      handleClickAddButton() {
+        if (this.isMobile) {
+          this.displaySizeQuantityModal = true;
+        } else {
+          this.addToCart();
+        }
+      },
+      addToCart() {
+        if (!this.displayLoader) {
+          const product = {
+            title: this.title,
+            id: `${this.id}-${this.size}`,
+            quantity: this.quantity,
+            price: this.price,
+            availableStock: this.availableStock,
+          };
+
+          // Show loader
+          this.displayLoader = true;
+
+          // Async method, check if product really can be added (ie: if still in stock)
+          // Then will call adequate callback
+          this.$store.dispatch('addProduct', product)
+              .then(this.addToCartSuccess, this.addToCartFailure)
+              .finally(() => {
+                // If displayed, close the size quantity modal displayed on smaller devices
+                this.displaySizeQuantityModal = false;
+                // Hide spinner
+                this.displayLoader = false;
+              });
+        }
+      },
+      addToCartSuccess() {
+        // Open the confirmation modal
+        this.displayAddConfirmationModal = true;
+      },
+      addToCartFailure() {
+        this.displayErrorModal = true;
       },
     },
     components: {
@@ -174,6 +305,7 @@
       heart: Heart,
       quantity: Quantity,
       sizes: Sizes,
+      modal: Modal,
     },
   };
 </script>

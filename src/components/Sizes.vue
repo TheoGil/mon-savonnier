@@ -2,6 +2,7 @@
   <div class="sizes flex">
     <button 
       class="flex"
+      type="button"
       v-on:click="$emit('setSize', 'small')"
       v-bind:class="{'is-active' : selectedSize == 'small'}"
     >
@@ -12,6 +13,7 @@
     </button>
     <button 
       class="flex"
+      type="button"
       v-on:click="$emit('setSize', 'medium')"
       v-bind:class="{'is-active' : selectedSize == 'medium'}"
     >
@@ -22,6 +24,7 @@
     </button>
     <button 
       class="flex"
+      type="button"
       v-on:click="$emit('setSize', 'large')"
       v-bind:class="{'is-active' : selectedSize == 'large'}"
     >
