@@ -62,6 +62,7 @@ export default new Router({
       ],
     },
   ],
+  mode: 'history',
   // linkActiveClass: 'is-active',
   linkExactActiveClass: 'is-active',
   scrollBehavior: (to, from, savedPosition) => {

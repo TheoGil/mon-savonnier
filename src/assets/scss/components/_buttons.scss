@@ -4,14 +4,40 @@
 }
 
 .button {
+	display: inline-block;
 	padding: .5rem 1rem;
 	border-radius: $button-border-radius;
 	background: $color-ui-main;
 	color: $color-grey;
 	cursor: pointer;
 	transition: $transition-duration;
+	line-height: 1;
+	text-align: center;
+	font-weight: 400;
 
-	&:hover {
+	&.large {
+		padding: 0.8rem 2rem;
+		font-size: 1.2rem;
+	}
+
+	&:hover,
+	&:focus {
 		background: $color-ui-main-darker;
+		color: $color-grey;
+	}
+
+	&.transparent {
+		background-color: transparent;
+	}
+
+	&.loading {
+		opacity: 0.5;
+		cursor: wait; // Fallback
+		cursor: progress;
+
+		&:hover,
+		&:focus {
+			background: $color-ui-main;
+		}
 	}
 }

@@ -5,9 +5,13 @@ $color-white: #FFFFFF;
 $color-black: #000000;
 $color-grey: #444444;
 $color-grey-light: #E6E6E6;
+$color-grey-lighter: #f1f1f1;
 $color-blue-grey: #99A7B1;
 $color-gold: #fbae17;
-$color-pink: #e91e63;
+$color-pink: #de84a7;
+$color-green: #8eb35a;
+$color-red: #dc2517;
+$color-transparent-layer: transparentize($color-white, .5);
 
 $z-index-highest: 100;
 
@@ -22,6 +26,8 @@ $breakpoints: (
 );
 
 $transition-duration: 150ms;
+$ease-out-back: cubic-bezier(0.175, 0.885, 0.320, 1);
+$ease-in-back: cubic-bezier(0.600, -0.280, 0.735, 0.045);
 
 $light-box-shadow: 0 0 5px transparentize($color-black, .75);
 

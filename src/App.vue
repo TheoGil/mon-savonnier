@@ -2,9 +2,7 @@
   <div id="app">
     <svg-sprites/>
     <navbar/>
-    <transition :name="transitionName">
-      <router-view/>
-    </transition>
+    <router-view/>
   </div>
 </template>
 
@@ -18,18 +16,9 @@ export default {
     'svg-sprites': SvgSprites,
     navbar: Header,
   },
-  data() {
-    return {
-      transitionName: 'slide-right',
-    };
-  },
-  watch: {
-    /*
-    $route(to, from) {
-      const toDepth = to.path.split('/').length;
-      const fromDepth = from.path.split('/').length;
-      this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left';
-    }, */
+  created() {
+    // Fetch cart content from local storage
+    this.$store.dispatch('fetchCartContent');
   },
 };
 </script>

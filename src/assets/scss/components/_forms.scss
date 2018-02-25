@@ -28,5 +28,20 @@
 			border-top-left-radius: 0;
 			border-bottom-left-radius: 0;
 		}
+		
+		&.disabled {
+			opacity: .5;
+			cursor: not-allowed;
+
+			&:hover,
+			&:focus {
+				background: $color-ui-main;
+			}
+		}
+	}
+
+	&.disabled {
+		opacity: .5;
+		pointer-events: none;
 	}
 }
