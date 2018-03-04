@@ -24,54 +24,25 @@ function fetchProduct(id) {
   });
 }
 
-function fetchAllProductsIds() {
-  const productListingAPIEndpoint = 'https://www.mon-savonnier.fr/api/products';
-
+function fetchAllProducts() {
+  const allProductsAPIEndpoint = 'https://www.mon-savonnier.fr/api/products/';
   return axios({
     method: 'get',
-    url: productListingAPIEndpoint,
+    url: allProductsAPIEndpoint,
     params: {
       ws_key: process.env.WS_KEY,
+      display: 'full',
     },
-    transformResponse: [function (data) {
-      // Convert data to a JSON object
-      const dataAsString = convert.xml2json(data);
-      return JSON.parse(dataAsString);
-    }, function (data) {
-      // Check if object contains data
-      if (data.elements) {
-        const rawProducts = data.elements[0].elements[0].elements;
-        const productIds = [];
-        rawProducts.forEach((product) => {
-          productIds.push(product.attributes.id);
-        });
-        return productIds;
-      }
-      return data;
-    }],
+    transformResponse: [transformFetchAllProductsResponse],
   });
 }
 
-function fetchAllProducts() {
-  return new Promise((resolve) => {
-    fetchAllProductsIds()
-      .then((response) => {
-        const productsIds = response.data;
-        const productsPromises = [];
-        productsIds.forEach((id) => {
-          productsPromises.push(fetchProduct(id));
-        });
-        // Allow .all to handle rejection.
-        // see https://davidwalsh.name/promises-results
-        Promise.all(productsPromises.map(p => p.catch(() => undefined))).then((values) => {
-          resolve(values);
-        });
-      });
-  });
+function transformFetchAllProductsResponse(XMLResponse) {
+  const JSONResponse = JSON.parse(convert.xml2json(XMLResponse, { compact: true }));
+  return JSONResponse.prestashop.products.product;
 }
 
 export {
-  fetchAllProductsIds,
   fetchAllProducts,
   fetchProduct,
 };
