@@ -46,7 +46,8 @@ export default new Router({
       component: Cart,
     },
     {
-      path: '/product',
+      path: '/product/:id',
+      name: 'product',
       component: ProductIndex,
       children: [
         {

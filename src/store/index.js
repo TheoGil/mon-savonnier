@@ -11,6 +11,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     products: [],
+    productsLoaded: false,
   },
   modules: {
     cart,
@@ -19,6 +20,7 @@ export default new Vuex.Store({
   mutations: {
     fetchAllProducts: (state, products) => {
       state.products = products;
+      state.productsLoaded = true;
     },
     fetchCartContent: (state, products) => {
       state.cart.products = products;

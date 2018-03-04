@@ -19,6 +19,8 @@ export default {
   created() {
     // Fetch cart content from local storage
     this.$store.dispatch('fetchCartContent');
+    // Fetch all products
+    this.$store.dispatch('fetchAllProducts');
   },
 };
 </script>

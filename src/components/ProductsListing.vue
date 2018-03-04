@@ -32,6 +32,7 @@
           <soap 
           :title="product.name.language._cdata"
           :price="product.price._cdata"
+          :id="product.id._cdata"
           :thumbnail="product.id_default_image._attributes['xlink:href']"
           />  
         </li>
@@ -54,10 +55,6 @@
       ...mapGetters({
         products: 'getProducts',
       }),
-    },
-    mounted() {
-      // Fetch all products
-      this.$store.dispatch('fetchAllProducts');
     },
   };
 </script>

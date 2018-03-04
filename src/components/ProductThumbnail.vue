@@ -1,6 +1,6 @@
 <template>
   <div class="product">
-    <router-link to="/product">
+    <router-link :to="{ name: 'product', params: { id }}">
       <div class="product-thumbnail-wrapper-outer">
         <div class="product-thumbnail-wrapper-inner">
           <div class="product-thumbnail-placeholder">
@@ -36,6 +36,6 @@
 <script>
   export default {
     name: 'ProductsThumbnail',
-    props: ['title', 'price', 'thumbnail'],
+    props: ['id', 'title', 'price', 'thumbnail'],
   };
 </script>
