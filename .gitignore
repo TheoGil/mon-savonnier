@@ -53,4 +53,6 @@ yarn-error.log*
 *.njsproj
 *.sln
 
+# Front end specifics
 .env
+dist
